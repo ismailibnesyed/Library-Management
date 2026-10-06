@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { baseUrl } from "../services/BaseUrl";
 import toast from "react-hot-toast";
 
@@ -10,8 +10,15 @@ const SIgnUp = () => {
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
   const role = "member";
+  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSignup = async () => {
+    if (!email || !username || !firstname || !lastname || !password) {
+      toast.error("Complete all fields before creating your account");
+      return;
+    }
+    setSubmitting(true);
     const userData = {
       email,
       username,
@@ -30,8 +37,11 @@ const SIgnUp = () => {
       const data = await res.json();
       if (!res.ok) throw new Error(data.detail || "Could not create account");
       toast.success(data.message || "Account created successfully");
+      navigate("/login");
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.message || "Could not create account");
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -86,7 +96,9 @@ const SIgnUp = () => {
                   type="password"
                   placeholder="Password"
                 />
-                <button onClick={handleSignup} className="btn-primary-custom auth-submit">Create account <span>→</span></button>
+                <button onClick={handleSignup} disabled={submitting} className="btn-primary-custom auth-submit">
+                  {submitting ? "Creating account..." : <>Create account <span>→</span></>}
+                </button>
                 <p className="auth-switch">Already a member? <Link to="/login">Sign in instead</Link></p>
               </div>
           </div>
