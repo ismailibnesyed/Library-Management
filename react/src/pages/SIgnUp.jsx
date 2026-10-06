@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router";
 import { baseUrl } from "../services/BaseUrl";
+import toast from "react-hot-toast";
 
 const SIgnUp = () => {
   const [email, setEmail] = useState("");
@@ -8,11 +9,9 @@ const SIgnUp = () => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const role = "member";
 
   const handleSignup = async () => {
-    // e.preventDefault();
-
     const userData = {
       email,
       username,
@@ -22,15 +21,18 @@ const SIgnUp = () => {
       role,
     };
 
-    const res = await fetch(`${baseUrl}/createuser`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
-    const data = await res.json();
-    console.log(data);
+    try {
+      const res = await fetch(`${baseUrl}/createuser`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || "Could not create account");
+      toast.success(data.message || "Account created successfully");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -83,14 +85,6 @@ const SIgnUp = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"
                   placeholder="Password"
-                />
-                <label htmlFor="signup-role">Role</label>
-                <input
-                  id="signup-role"
-                  value={role}
-                  onChange={(e) => setRole(e.target.value)}
-                  type="text"
-                  placeholder="Role"
                 />
                 <button onClick={handleSignup} className="btn-primary-custom auth-submit">Create account <span>→</span></button>
                 <p className="auth-switch">Already a member? <Link to="/login">Sign in instead</Link></p>

@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import jwt, JWTError
+from sqlalchemy.exc import IntegrityError
 
 # Router containing account and authentication endpoints.
 router = APIRouter()
@@ -28,7 +29,7 @@ class CreateUsers(BaseModel):
     firstname : str
     lastname : str
     password : str
-    role : str
+    role : str = "member"
 
 # Optional profile fields accepted during a user update.
 class UpdateUser(BaseModel):
@@ -104,8 +105,15 @@ def create_users(db : db_dependency, new_user : CreateUsers):
         role = new_user.role
     )
 
-    db.add(user_model)
-    db.commit()
+    try:
+        db.add(user_model)
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(
+            status_code=409,
+            detail="Email or username is already registered",
+        )
 
     return JSONResponse(status_code=201, content={'message' : 'User created successfully'})
 
