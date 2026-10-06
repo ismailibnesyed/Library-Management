@@ -1,9 +1,9 @@
-from fastapi import FastAPI, Depends, HTTPException, Query
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
-from typing import Annotated, Optional
+from typing import Annotated
 import models
 from models import Books, Users, Reservations, IssueRecords
-from database import engine, SessionLocal
+from database import engine, SessionLocal, get_db
 from fastapi.responses import JSONResponse
 from router import admin, auth
 from router.auth import get_current_user
@@ -12,7 +12,13 @@ from router.auth import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-origins = ["http://localhost:5173"]
+origins = [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:4173",
+    "https://library-management-2xx8.onrender.com",
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -27,14 +33,6 @@ models.Base.metadata.create_all(bind=engine)
 # Register authentication and librarian-specific routes.
 app.include_router(auth.router)
 app.include_router(admin.router)
-
-# Provide one database session per request and close it afterward.
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]

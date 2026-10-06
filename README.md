@@ -34,7 +34,7 @@ The app has two main parts:
 - Python
 - FastAPI
 - SQLAlchemy
-- SQLite
+- Supabase PostgreSQL (SQLite fallback for local development)
 - JWT Authentication
 - Passlib for password hashing
 
@@ -77,6 +77,12 @@ Before running the project, make sure you have installed:
 - Python 3.10 or newer
 - Node.js and npm
 - A code editor like VS Code
+
+### Database configuration
+
+The backend uses the Supabase PostgreSQL connection configured in
+`database.py`. Keep the connection string private and never commit credentials
+to a public repository.
 
 ---
 

@@ -1,9 +1,9 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from datetime import timedelta, datetime, timezone
 from typing import Annotated, Optional
-from database import SessionLocal
+from database import get_db
 from models import Users, Books, Reservations, IssueRecords
 from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
@@ -38,14 +38,6 @@ class IssueBook(BaseModel):
     book_id: int
     user_id: int
 
-
-# Provide and clean up a database session for admin handlers.
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
@@ -174,7 +166,7 @@ def return_book(user: user_dependency, db: db_dependency, issue_id: int):
     if issue is None:
         raise HTTPException(status_code=404, detail='Issue record not found')
 
-    return_date = datetime.now
+    return_date = datetime.now()
     fine = calculate_fine(issue.due_date, return_date)
 
     issue.return_date = return_date

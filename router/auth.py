@@ -1,9 +1,9 @@
-from fastapi import FastAPI, APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from datetime import timedelta, datetime, timezone
 from typing import Annotated, Optional
-from database import SessionLocal
+from database import get_db
 from models import Users
 from fastapi.responses import JSONResponse
 from passlib.context import CryptContext
@@ -88,14 +88,6 @@ def get_current_user(token: Annotated[str, Depends(OAuth2_bearer)]):
         print(e)
         raise HTTPException(status_code=401, detail='Invalid token')
 
-# Provide and clean up a database session for router handlers.
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
 db_dependency = Annotated[Session, Depends(get_db)]
 user_dependency = Annotated[dict, Depends(get_current_user)]
 
@@ -122,8 +114,8 @@ def create_users(db : db_dependency, new_user : CreateUsers):
 def login_user(db : db_dependency, form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
     
     user = authenticate_user(form_data.username, form_data.password, db) 
-    if user is None: 
-        return  "Failed authentication"
+    if user is False:
+        raise HTTPException(status_code=401, detail="Failed authentication")
     token = create_access_token(user,timedelta(minutes=30))
     return {'access_token': token, 'token_type': 'bearer'}
 

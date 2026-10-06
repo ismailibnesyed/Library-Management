@@ -1,15 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-# SQLite database connection string used by the library application.
-SQLALCHEMY_DATABASE_URL = 'sqlite:///./library.db'
+DATABASE_URL = 'postgresql://postgres.akxxpmlzaocofusumfan:Library_Management180@aws-0-ap-south-1.pooler.supabase.com:5432/postgres'
 
-# Create the SQLAlchemy engine and allow use from FastAPI worker threads.
-engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={'check_same_thread': False})
-
-# Factory for creating database sessions on demand.
-SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
-
-# Base class inherited by all SQLAlchemy models.
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker( autocommit=False, autoflush=False, bind=engine )
 Base = declarative_base()
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

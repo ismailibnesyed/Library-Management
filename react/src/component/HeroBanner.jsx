@@ -1,26 +1,33 @@
-import React from "react";
+import { FiArrowRight, FiBookOpen, FiSearch } from "react-icons/fi";
+import { Link } from "react-router";
 
-const HeroBanner = () => {
-  return (
-    <div
-      className="hero min-h-screen"
-      style={{
-        backgroundImage:
-          "url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp)",
-      }}
-    >
-      <div className="hero-overlay"></div>
-      <div className="hero-content text-neutral-content text-center">
-        <div className="max-w-md">
-          <h1 className="mb-5 text-5xl font-bold">Your Library, Organized Smarter</h1>
-          <p className="mb-5">
-            Manage books, members, borrowing, and returns effortlessly—all from one simple, reliable platform.
-          </p>
-          <button className="btn btn-primary cursor-pointer">Get Started</button>
+const HeroBanner = () => (
+  <section className="hero-section">
+    <div className="container-wide hero-grid">
+      <div className="hero-copy">
+        <span className="eyebrow">A better way to read</span>
+        <h1>Find your next <em>great story.</em></h1>
+        <p>Explore a thoughtfully curated collection, keep your reading life organized, and always know what to pick up next.</p>
+        <div className="hero-actions">
+          <Link className="btn-primary-custom" to="/books">Explore the collection <FiArrowRight /></Link>
+          <Link className="btn-secondary-custom" to="/signup">Join the library</Link>
+        </div>
+        <div className="hero-proof">
+          <div className="proof-avatars"><span>R</span><span>A</span><span>M</span><span>+</span></div>
+          <span>Beloved by curious readers everywhere</span>
         </div>
       </div>
+      <div className="hero-art" aria-label="A stack of books">
+        <div className="art-glow"></div>
+        <div className="book-stack">
+          <div className="book book-one"><FiBookOpen /><strong>THE<br />QUIET<br />HOUR</strong></div>
+          <div className="book book-two"><FiSearch /><strong>WAYS<br />OF<br />SEEING</strong></div>
+          <div className="book book-three"><strong>THE<br />GARDEN<br />WITHIN</strong></div>
+        </div>
+        <div className="art-note"><span>✦</span> Take a moment.<br />Stay a while.</div>
+      </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default HeroBanner;

@@ -1,1 +1,1 @@
-export const baseUrl = "https://library-management-2xx8.onrender.com/";
+export const baseUrl = "https://library-management-2xx8.onrender.com";

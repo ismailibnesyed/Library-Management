@@ -55,44 +55,35 @@ const Login = () => {
   // console.log(authUser);
 
   return (
-    <div>
-      <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col text-center">
-          <div className="text-center">
-            <h1 className="text-5xl font-bold">Login now!</h1>
-            <p className="py-6 w-100">Please Enter your credential</p>
+    <div className="auth-page">
+      <div className="auth-panel">
+          <div className="auth-heading">
+            <span className="eyebrow">Welcome back</span>
+            <h1>Good to see you again.</h1>
+            <p>Sign in to continue exploring your reading list.</p>
           </div>
-          <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <div className="card-body">
-              <fieldset className="fieldset">
-                <label className="label">Username</label>
+          <div className="auth-card">
+              <div className="auth-fields">
+                <label htmlFor="login-username">Username</label>
                 <input
+                  id="login-username"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   type="text"
-                  className="input"
                   placeholder="Username"
                 />
-                <label className="label">Password</label>
+                <label htmlFor="login-password">Password</label>
                 <input
+                  id="login-password"
                   type="password"
-                  className="input"
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <div>
-                  <Link to={"/signup"} className="link link-hover">
-                    Don't have an account.
-                  </Link>
-                </div>
-                <button onClick={handleLogin} className="btn cursor-pointer btn-neutral mt-4">
-                  Login
-                </button>
-              </fieldset>
-            </div>
+                <button onClick={handleLogin} className="btn-primary-custom auth-submit">Sign in <span>→</span></button>
+                <p className="auth-switch">New to Leaf &amp; Lore? <Link to="/signup">Create an account</Link></p>
+              </div>
           </div>
-        </div>
       </div>
     </div>
   );
