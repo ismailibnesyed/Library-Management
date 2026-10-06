@@ -1,0 +1,68 @@
+src/
+│
+├── api/
+│   └── axiosInstance.jsx
+│
+├── assets/
+│
+├── components/
+│   ├── Navbar.jsx
+│   ├── Footer.jsx
+│   ├── Container.jsx
+│   ├── Loading.jsx
+│   ├── ParcelCard.jsx
+│   ├── StatusBadge.jsx
+│   └── DashboardCard.jsx
+│
+├── context/
+│   └── AuthProvider.jsx
+│
+├── layouts/
+│   ├── Root.jsx
+│   ├── AdminLayout.jsx
+│   ├── AgentLayout.jsx
+│   └── CustomerLayout.jsx
+│
+├── pages/
+│
+│── Public
+│   ├── Home.jsx
+│   ├── Login.jsx
+│   ├── SignUp.jsx
+│   └── Tracking.jsx
+│
+│── Customer
+│   ├── CustomerDashboard.jsx
+│   ├── Profile.jsx
+│   ├── CreateParcel.jsx
+│   ├── MyParcels.jsx
+│   └── ParcelDetails.jsx
+│
+│── Agent
+│   ├── AgentDashboard.jsx
+│   ├── DeliveryApplications.jsx
+│   ├── ApplicationDetails.jsx
+│   └── ReviewApplication.jsx
+│
+│── Delivery Man
+│   ├── DeliveryDashboard.jsx
+│   ├── AssignedParcel.jsx
+│   └── UpdateStatus.jsx
+│
+│── Admin
+│   ├── AdminDashboard.jsx
+│   ├── ManageUsers.jsx
+│   ├── CreateEmployee.jsx
+│   ├── ManageParcels.jsx
+│   ├── ManageApplications.jsx
+│   └── Reports.jsx
+│
+├── routes/
+│   ├── Routes.jsx
+│   ├── PrivateRoutes.jsx
+│   ├── AdminProtected.jsx
+│   ├── AgentProtected.jsx
+│   └── CustomerProtected.jsx
+│
+└── services/
+    └── BaseUrl.jsx

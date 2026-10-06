@@ -1,0 +1,139 @@
+[
+  {
+    "category": "Science Fiction",
+    "id": 1,
+    "price": 450,
+    "available_copies": 7,
+    "created_at": "2026-09-13T10:00:00",
+    "description": "A stranded astronaut uses science and ingenuity to survive on Mars.",
+    "title": "The Martian",
+    "author": "Andy Weir",
+    "total_copies": 10,
+    "cover_image": null
+  },
+  {
+    "category": "Story",
+    "id": 2,
+    "price": 250,
+    "available_copies": 12,
+    "created_at": "2026-09-13T10:01:00",
+    "description": "A young prince visits different planets and explores friendship, love, and human nature.",
+    "title": "The Little Prince",
+    "author": "Antoine de Saint-Exupéry",
+    "total_copies": 15,
+    "cover_image": null
+  },
+  {
+    "category": "Fantasy",
+    "id": 3,
+    "price": 550,
+    "available_copies": 6,
+    "created_at": "2026-09-13T10:02:00",
+    "description": "Bilbo Baggins joins a company of dwarves on a journey to reclaim treasure guarded by a dragon.",
+    "title": "The Hobbit",
+    "author": "J. R. R. Tolkien",
+    "total_copies": 8,
+    "cover_image": null
+  },
+  {
+    "category": "Mystery",
+    "id": 4,
+    "price": 350,
+    "available_copies": 9,
+    "created_at": "2026-09-13T10:03:00",
+    "description": "Detective Hercule Poirot investigates a murder aboard a snowbound train.",
+    "title": "Murder on the Orient Express",
+    "author": "Agatha Christie",
+    "total_copies": 12,
+    "cover_image": null
+  },
+  {
+    "category": "Romance",
+    "id": 5,
+    "price": 300,
+    "available_copies": 5,
+    "created_at": "2026-09-13T10:04:00",
+    "description": "Elizabeth Bennet and Mr. Darcy confront mistaken judgments, social expectations, and their growing affection.",
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "total_copies": 10,
+    "cover_image": null
+  },
+  {
+    "category": "Software Engineering",
+    "id": 6,
+    "price": 700,
+    "available_copies": 8,
+    "created_at": "2026-09-13T10:05:00",
+    "description": "A practical guide to writing readable, maintainable code and improving software design.",
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "total_copies": 10,
+    "cover_image": null
+  },
+  {
+    "category": "Programming",
+    "id": 7,
+    "price": 800,
+    "available_copies": 4,
+    "created_at": "2026-09-13T10:06:00",
+    "description": "Practical techniques and principles for developing software and becoming a more effective programmer.",
+    "title": "The Pragmatic Programmer",
+    "author": "David Thomas and Andrew Hunt",
+    "total_copies": 7,
+    "cover_image": null
+  },
+  {
+    "category": "Science",
+    "id": 8,
+    "price": 500,
+    "available_copies": 6,
+    "created_at": "2026-09-13T10:07:00",
+    "description": "An introduction to cosmology exploring space, time, black holes, and the universe.",
+    "title": "A Brief History of Time",
+    "author": "Stephen Hawking",
+    "total_copies": 9,
+    "cover_image": null
+  },
+  {
+    "category": "Fiction",
+    "id": 9,
+    "price": 320,
+    "available_copies": 10,
+    "created_at": "2026-09-13T10:08:00",
+    "description": "A young shepherd travels in search of treasure and learns about following his dreams.",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "total_copies": 15,
+    "cover_image": null
+  },
+  {
+    "category": "Adventure",
+    "id": 10,
+    "price": 280,
+    "available_copies": 0,
+    "created_at": "2026-09-13T10:09:00",
+    "description": "Young Jim Hawkins follows a treasure map into a dangerous adventure with pirates.",
+    "title": "Treasure Island",
+    "author": "Robert Louis Stevenson",
+    "total_copies": 5,
+    "cover_image": null
+  }
+]
+===========================================
+{
+  "email": "ismail",
+  "username": "ismail",
+  "firstname": "ismail",
+  "lastname": "ismail",
+  "password": "ismail",
+  "role": "admin"
+}
+{
+  "email": "hossain",
+  "username": "hossain",
+  "firstname": "hossain",
+  "lastname": "hossain",
+  "password": "hossain",
+  "role": "user"
+}
