@@ -1,4 +1,7 @@
+import logging
+
 from fastapi import FastAPI, Depends, HTTPException, Query
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from typing import Annotated, Optional
 import models
@@ -11,6 +14,7 @@ from router.auth import get_current_user
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+logger = logging.getLogger(__name__)
 
 origins = [
     "https://leafandlore.netlify.app",
@@ -29,9 +33,32 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-models.Base.metadata.create_all(bind=engine)
 app.include_router(auth.router)
 app.include_router(admin.router)
+
+
+@app.on_event("startup")
+def initialize_database():
+    try:
+        models.Base.metadata.create_all(bind=engine)
+        app.state.database_ready = True
+    except SQLAlchemyError:
+        app.state.database_ready = False
+        logger.exception(
+            "Database initialization failed. Check the DATABASE_URL environment "
+            "variable and verify the Supabase project and password are current."
+        )
+
+
+@app.get("/health")
+def health_check():
+    if not getattr(app.state, "database_ready", False):
+        return JSONResponse(
+            status_code=503,
+            content={"status": "degraded", "database": "unavailable"},
+        )
+    return {"status": "ok", "database": "ok"}
+
 
 def get_db():
     db = SessionLocal()

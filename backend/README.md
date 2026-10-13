@@ -110,6 +110,26 @@ Install all required packages from `requirements.txt`:
 pip install -r requirements.txt
 ```
 
+### Render deployment
+
+Set the Render service root directory to `backend`, then use:
+
+```text
+Build Command: pip install -r requirements.txt
+Start Command: uvicorn main:app --host 0.0.0.0 --port $PORT
+```
+
+Add these environment variables in Render:
+
+- `DATABASE_URL`: the current Supabase **Session pooler** connection string copied
+  from Supabase Project Settings > Database > Connection string. It must use the
+  current project reference and password, for example
+  `postgresql://postgres.<project-ref>:<password>@aws-0-<region>.pooler.supabase.com:5432/postgres`.
+- `SECRET_KEY`: a long random value used to sign login tokens.
+
+Do not reuse a connection string from an old, paused, or deleted Supabase project.
+The `/health` endpoint returns `200` only when the database connection succeeds.
+
 ---
 
 ## 🏃 Running the Application

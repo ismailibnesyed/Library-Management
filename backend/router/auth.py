@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
@@ -15,7 +17,10 @@ router = APIRouter()
 bcrypt_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 OAuth2_bearer = OAuth2PasswordBearer(tokenUrl='login')
 
-SECRET_KEY ='86746eeb8285ca279c6251e0bd83cdd50c88027b934a93f19d8b9af782139516'
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "local-development-secret-change-this-in-production",
+)
 ALGORITHM = 'HS256' 
 
 class CreateUsers(BaseModel):
